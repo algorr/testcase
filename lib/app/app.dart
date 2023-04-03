@@ -1,30 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testcase/features/resources/theme_manager.dart';
-import 'package:testcase/features/view/home_view.dart';
+import 'package:testcase/features/router/app_router.dart';
 import 'package:testcase/features/viewmodel/binding/controller_bindings.dart';
 
-class MyApp extends StatefulWidget {
-  //const MyApp({super.key}); // default constructor
+class MyApp extends StatelessWidget {
+  MyApp({super.key});
 
-  const MyApp._internal(); // private named constructor
+  final _appRouter = AppRouter();
 
-  static const MyApp instance =
-      MyApp._internal(); // single instance -- singleton
-
-  factory MyApp() => instance; // factory for the class instance
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return GetMaterialApp.router(
       debugShowCheckedModeBanner: false,
-      initialBinding: ControllerBindings(),
-      home: const HomeView(),
+      initialBinding: ControllerBindings(router: _appRouter),
+      routerDelegate: _appRouter.delegate(),
+      routeInformationParser: _appRouter.defaultRouteParser(),
       theme: getAppTheme(),
     );
   }

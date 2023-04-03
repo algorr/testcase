@@ -1,7 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 import 'package:get/get.dart';
-
 import 'package:testcase/features/model/albums.dart';
 import 'package:testcase/features/repository/repository.dart';
 
@@ -13,16 +10,17 @@ class Controller extends GetxController {
   var isLoading = false.obs;
 
   Rx<List<Albums>> foundAlbum = Rx<List<Albums>>([]);
-  var searchResult = <Albums>[].obs;
+  //var searchResult = <Albums>[].obs;
 
   @override
   void onInit() {
     super.onInit();
-    fetchPhotos();
-    //foundAlbum.value = albums;
+    fetchAlbums();
+
+    foundAlbum.value = albums.obs.value;
   }
 
-  Future<void> fetchPhotos() async {
+  Future<void> fetchAlbums() async {
     try {
       toggleLoadingState();
       final response = await _repository.fetch();
