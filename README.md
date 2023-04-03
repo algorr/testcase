@@ -1,2 +1,2 @@
 # testcase
- testcase for teklifbilişim
+ test case for teklifbilişim
