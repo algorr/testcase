@@ -30,7 +30,9 @@ class Controller extends GetxController {
       }
       toggleLoadingState();
       update();
-    } catch (e) {}
+    } catch (e) {
+      throw Exception();
+    }
   }
 
   void toggleLoadingState() {

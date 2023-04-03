@@ -5,7 +5,6 @@ import 'package:get/instance_manager.dart';
 import 'package:testcase/core/widgets/custom_circular_progress_bar.dart';
 import 'package:testcase/features/resources/index.dart';
 import 'package:testcase/features/router/app_router.dart';
-import 'package:testcase/features/view/detail_view.dart';
 import 'package:testcase/features/viewmodel/controller/controller.dart';
 
 @RoutePage()
