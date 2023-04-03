@@ -22,11 +22,14 @@ class DetailView extends StatelessWidget {
   ListView _detailListView() {
     return ListView(
       children: [
-        Card(
-          child: ListTile(
-            leading: Image.network(albums.thumbnailUrl!),
-            title: Text(albums.title!),
-            subtitle: Text(albums.id!.toString()),
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.p14),
+          child: Card(
+            child: ListTile(
+              leading: Image.network(albums.thumbnailUrl!),
+              title: Text(albums.title!),
+              subtitle: Text(albums.id!.toString()),
+            ),
           ),
         )
       ],

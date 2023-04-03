@@ -15,6 +15,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final controller = Get.find<Controller>();
+
     return Scaffold(
         appBar: AppBar(
           title: const Text(AppStrings.appBarTitle),
@@ -22,6 +23,7 @@ class HomeView extends StatelessWidget {
         body: _homeListView(controller, size));
   }
 
+//* Listview func for body
   ListView _homeListView(Controller controller, Size size) {
     return ListView(
       children: [
@@ -44,19 +46,25 @@ class HomeView extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: controller.foundAlbum.value.length,
                     itemBuilder: (context, index) {
-                      return Card(
-                        elevation: AppSize.s10,
-                        child: ListTile(
-                          onTap: () {
-                            AutoRouter.of(context).push(DetailViewRoute(
-                                albums: controller.foundAlbum.value[index]));
-                          },
-                          leading: Image.network(
-                              controller.foundAlbum.value[index].thumbnailUrl!),
-                          title:
-                              Text(controller.foundAlbum.value[index].title!),
-                          subtitle: Text(
-                              controller.foundAlbum.value[index].id.toString()),
+                      print(controller.foundAlbum.value.length);
+                      print(controller.foundAlbum.value.length);
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: AppPadding.p14),
+                        child: Card(
+                          elevation: AppSize.s10,
+                          child: ListTile(
+                            onTap: () {
+                              AutoRouter.of(context).push(DetailViewRoute(
+                                  albums: controller.foundAlbum.value[index]));
+                            },
+                            leading: Image.network(controller
+                                .foundAlbum.value[index].thumbnailUrl!),
+                            title:
+                                Text(controller.foundAlbum.value[index].title!),
+                            subtitle: Text(controller.foundAlbum.value[index].id
+                                .toString()),
+                          ),
                         ),
                       );
                     },

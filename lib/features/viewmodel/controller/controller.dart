@@ -10,16 +10,15 @@ class Controller extends GetxController {
   var isLoading = false.obs;
 
   Rx<List<Albums>> foundAlbum = Rx<List<Albums>>([]);
-  //var searchResult = <Albums>[].obs;
 
   @override
   void onInit() {
     super.onInit();
     fetchAlbums();
-
-    foundAlbum.value = albums.obs.value;
+    foundAlbum.value = albums;
   }
 
+//* fetch data from api
   Future<void> fetchAlbums() async {
     try {
       toggleLoadingState();
@@ -27,22 +26,25 @@ class Controller extends GetxController {
 
       if (response.isNotEmpty) {
         albums = response.obs;
+        foundAlbum.value = albums;
       }
       toggleLoadingState();
-      update();
     } catch (e) {
       throw Exception();
     }
   }
 
+//* toggle isLoading value
   void toggleLoadingState() {
     isLoading.value = !isLoading.value;
   }
 
+//* filter albums
   void filterAlbums(String text) {
     List<Albums> result = [];
     if (text.isEmpty) {
       result = albums;
+      update();
     } else {
       result = albums
           .where((element) => element.title
