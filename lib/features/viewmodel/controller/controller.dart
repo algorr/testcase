@@ -11,6 +11,7 @@ class Controller extends GetxController {
 
   var albums = <Albums>[].obs;
   var isLoading = false.obs;
+
   Rx<List<Albums>> foundAlbum = Rx<List<Albums>>([]);
   var searchResult = <Albums>[].obs;
 
@@ -43,7 +44,13 @@ class Controller extends GetxController {
     if (title.isEmpty) {
       result = albums;
     } else {
-      searchResult.assignAll(albums.where((p0) => p0.title == p0).toList());
+      result = albums
+          .where((element) => element.title
+              .toString()
+              .toLowerCase()
+              .contains(title.toLowerCase()))
+          .toList();
     }
+    foundAlbum.value = result;
   }
 }

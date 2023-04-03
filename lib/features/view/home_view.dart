@@ -22,7 +22,7 @@ class HomeView extends StatelessWidget {
               padding: const EdgeInsets.all(AppPadding.p14),
               child: TextField(
                 controller: textEditingController,
-                onChanged: (value) {},
+                onChanged: (value) => controller.filterAlbums(value),
                 decoration:
                     const InputDecoration(hintText: AppStrings.textEditingHint),
               ),
@@ -36,16 +36,18 @@ class HomeView extends StatelessWidget {
                       height: size.height,
                       width: size.width,
                       child: ListView.builder(
-                        itemCount: controller.albums.length,
+                        itemCount: controller.foundAlbum.value.length,
                         itemBuilder: (context, index) {
                           return Card(
                             elevation: AppSize.s10,
                             child: ListTile(
-                              leading: Image.network(
-                                  controller.albums[index].thumbnailUrl!),
-                              title: Text(controller.albums[index].title!),
-                              subtitle:
-                                  Text(controller.albums[index].id.toString()),
+                              leading: Image.network(controller
+                                  .foundAlbum.value[index].thumbnailUrl!),
+                              title: Text(
+                                  controller.foundAlbum.value[index].title!),
+                              subtitle: Text(controller
+                                  .foundAlbum.value[index].id
+                                  .toString()),
                             ),
                           );
                         },
