@@ -19,7 +19,7 @@ class Controller extends GetxController {
   void onInit() {
     super.onInit();
     fetchPhotos();
-    foundAlbum.value = albums;
+    //foundAlbum.value = albums;
   }
 
   Future<void> fetchPhotos() async {
@@ -39,16 +39,16 @@ class Controller extends GetxController {
     isLoading.value = !isLoading.value;
   }
 
-  void filterAlbums(String title) {
+  void filterAlbums(String text) {
     List<Albums> result = [];
-    if (title.isEmpty) {
+    if (text.isEmpty) {
       result = albums;
     } else {
       result = albums
           .where((element) => element.title
               .toString()
               .toLowerCase()
-              .contains(title.toLowerCase()))
+              .contains(text.toLowerCase()))
           .toList();
     }
     foundAlbum.value = result;

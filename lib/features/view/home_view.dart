@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/instance_manager.dart';
 import 'package:testcase/features/resources/index.dart';
+import 'package:testcase/features/view/detail_view.dart';
 import 'package:testcase/features/viewmodel/controller/controller.dart';
 
 class HomeView extends StatelessWidget {
@@ -9,7 +10,6 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController textEditingController = TextEditingController();
     Size size = MediaQuery.of(context).size;
     final controller = Get.find<Controller>();
     return Scaffold(
@@ -21,7 +21,6 @@ class HomeView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(AppPadding.p14),
               child: TextField(
-                controller: textEditingController,
                 onChanged: (value) => controller.filterAlbums(value),
                 decoration:
                     const InputDecoration(hintText: AppStrings.textEditingHint),
@@ -41,6 +40,12 @@ class HomeView extends StatelessWidget {
                           return Card(
                             elevation: AppSize.s10,
                             child: ListTile(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => DetailView(
+                                        albums: controller
+                                            .foundAlbum.value[index])));
+                              },
                               leading: Image.network(controller
                                   .foundAlbum.value[index].thumbnailUrl!),
                               title: Text(
